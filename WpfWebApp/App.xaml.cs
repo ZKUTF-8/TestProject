@@ -5,10 +5,14 @@ using System.Windows;
 namespace WpfWebApp
 {
     /// <summary>
-    /// Interaction logic for App.xaml
+    /// WPF 应用程序主类
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            // 初始化应用程序
+        }
     }
 
 }

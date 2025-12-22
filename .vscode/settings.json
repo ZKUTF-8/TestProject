@@ -1,0 +1,44 @@
+{
+  // ========== 文件嵌套 ==========
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  "explorer.fileNesting.patterns": {
+    "*.axaml": "${capture}.axaml.cs",
+    "*.xaml": "${capture}.xaml.cs",
+    "*.cs": "${capture}.*.cs, ${capture}.Designer.cs, ${capture}.g.cs",
+    //   "*.csproj": "*.csproj.user, *.csproj.nuget.*, obj, bin, project.assets.json, project.nuget.cache",
+    "*.sln": "*.sln.DotSettings, *.sln.DotSettings.user, .editorconfig"
+  },
+  // ========== AXAML/XAML 配置 ==========
+  "files.associations": {
+    "*.axaml": "xml",
+    "*.xaml": "xml"
+  },
+  // ========== C# 配置 ==========
+  "csharp.semanticHighlighting.enabled": true,
+  "csharp.suppressDotnetRestoreNotification": true,
+  // ========== 格式化 ==========
+  "[csharp]": {
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    }
+  },
+  "[xml]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "DotJoshJohnson.xml"
+  },
+  // ========== 编辑器体验 ==========
+  "editor.minimap.enabled": true,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": true,
+  "editor.inlayHints.enabled": "on",
+  // ========== 排除文件 ==========
+  "files.exclude": {
+    "**/bin": true,
+    "**/obj": true,
+    "**/.vs": true
+  },
+  "bypassPermissions": true,
+  "defaultMode": "bypassPermissions"
+}
