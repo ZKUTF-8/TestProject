@@ -285,7 +285,6 @@ import { lightningChart, emptyFill, Themes, LegendBoxBuilders, SolidLine, SolidF
 
 const activeTab = ref('1');
 const connected = ref(false);
-const connectionStatus = ref('正在连接到 SignalR 服务...');
 const currentTime = ref('');
 const loading = ref(false);
 const messages = ref<string[]>([]);

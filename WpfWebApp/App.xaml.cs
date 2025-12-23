@@ -56,6 +56,23 @@ namespace WpfWebApp
 
             app.UseCors();
 
+#if !DEBUG
+            // 生产环境：提供静态文件服务
+            app.UseStaticFiles(new Microsoft.AspNetCore.Builder.StaticFileOptions
+            {
+                FileProvider = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(
+                    System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "wwwroot")),
+                RequestPath = ""
+            });
+
+            // 默认路由到 index.html
+            app.MapFallbackToFile("index.html", new Microsoft.AspNetCore.Builder.StaticFileOptions
+            {
+                FileProvider = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(
+                    System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "wwwroot"))
+            });
+#endif
+
             // 映射 SignalR Hub
             app.MapHub<AppHub>("/hub");
 
