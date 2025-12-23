@@ -331,8 +331,6 @@ let series1: any = null;
 let series2: any = null;
 let lastFrameTime = 0;
 let frameCount = 0;
-let fpsCheckInterval: any = null;
-let localRenderLoop: any = null;
 
 let connection: signalR.HubConnection;
 
@@ -353,16 +351,16 @@ onMounted(async () => {
         'StreamData',
         (data: { channel1: number[]; channel2: number[] }) => {
             if (chart && series1 && series2) {
-                // series1.clear();
-                // series1.appendSamples({
-                //     yValues: data.channel1,
-                //     step: 1
-                // });
-                // series2.clear();
-                // series2.appendSamples({
-                //     yValues: data.channel2,
-                //     step: 1
-                // });
+                series1.clear();
+                series1.appendSamples({
+                    yValues: data.channel1,
+                    step: 1
+                });
+                series2.clear();
+                series2.appendSamples({
+                    yValues: data.channel2,
+                    step: 1
+                });
                 frameCount++;
                 const now = performance.now();
                 if (now - lastFrameTime >= 1000) {
@@ -394,9 +392,6 @@ watch(activeTab, async (newTab) => {
 });
 
 onUnmounted(async () => {
-    if (fpsCheckInterval) {
-        clearInterval(fpsCheckInterval);
-    }
     if (chartStreaming.value) {
         await toggleChartStreaming();
     }
@@ -465,10 +460,6 @@ const toggleChartStreaming = async () => {
         chartStreaming.value = false;
         currentFPS.value = 0;
         frameCount = 0;
-        if (fpsCheckInterval) {
-            clearInterval(fpsCheckInterval);
-            fpsCheckInterval = null;
-        }
         if (chart) {
             chart.setTitle('实时数据流 (2通道 x 30000点) - FPS: 0');
         }
@@ -476,14 +467,6 @@ const toggleChartStreaming = async () => {
         await connection.invoke('StartStreaming');
         chartStreaming.value = true;
         lastFrameTime = performance.now();
-
-        // 监控数据流是否停止
-        fpsCheckInterval = setInterval(() => {
-            if (chart && performance.now() - lastFrameTime > 1300) {
-                chart.setTitle('实时数据流 (2通道 x 30000点) - FPS: 0');
-                currentFPS.value = 0;
-            }
-        }, 100);
     }
 };
 

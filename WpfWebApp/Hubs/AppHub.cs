@@ -96,7 +96,7 @@ namespace WpfWebApp.Hubs
                 {
                     while (!cts.Token.IsCancellationRequested)
                     {
-                        // 生成两个通道的数据（每通道30000点）
+                        // 生成两个通道的数据（每通道300点）
                         var channel1 = GenerateWaveform(30000, 1.0, 1.0);
                         var channel2 = GenerateWaveform(30000, 2.0, 1.0);
 
