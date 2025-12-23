@@ -50,3 +50,4 @@ dotnet restore WpfWebApp/WpfWebApp.csproj
 - 代码隐藏文件是与 XAML 定义互补的分部类
 - 应用程序启动通过 `App.xaml` 配置（StartupUri 指向 MainWindow）
 - 添加新的 Window/UserControl 时，需要同时创建 .xaml 和 .xaml.cs 文件
+- 回复尽量精简能说明问题重点就行

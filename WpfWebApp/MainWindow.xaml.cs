@@ -1,13 +1,4 @@
-﻿using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace WpfWebApp
 {
@@ -19,6 +10,15 @@ namespace WpfWebApp
         public MainWindow()
         {
             InitializeComponent();
+            InitializeWebView();
+        }
+
+        private async void InitializeWebView()
+        {
+            await webView.EnsureCoreWebView2Async();
+
+            // 开发环境：加载 Vite 开发服务器（默认端口 5173）
+            webView.CoreWebView2.Navigate("http://localhost:5173");
         }
     }
 }
