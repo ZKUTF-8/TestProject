@@ -43,15 +43,12 @@ namespace WpfWebApp
             // 添加 SignalR 服务（使用 MessagePack 二进制协议）
             builder.Services.AddSignalR().AddMessagePackProtocol();
 
-            // 添加 CORS 支持（允许前端调用）
+            // 跨域配置
             builder.Services.AddCors(options =>
             {
-                options.AddDefaultPolicy(policy =>
+                options.AddDefaultPolicy(builder =>
                 {
-                    policy.WithOrigins("http://localhost:5173")
-                          .AllowAnyHeader()
-                          .AllowAnyMethod()
-                          .AllowCredentials();
+                    builder.SetIsOriginAllowed(x => true).AllowAnyHeader().AllowAnyMethod().AllowCredentials();
                 });
             });
 
@@ -65,7 +62,7 @@ namespace WpfWebApp
             _host = app;
 
             // 在后台启动服务器
-            await app.RunAsync("http://localhost:5000");
+            await app.RunAsync("http://[::]:5000");
         }
     }
 }
